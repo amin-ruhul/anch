@@ -28,7 +28,7 @@ function PrimaryButton({
       {isLoading && (
         <InlineLoader className="inline-block h-[3rem] w-[3rem] absolute top-[calc(50%_-_1.5rem)] left-[calc(50%_-_1.5rem)]" />
       )}
-      <p
+      <div
         className={clsx(
           {
             invisible: isLoading,
@@ -38,7 +38,7 @@ function PrimaryButton({
         )}
       >
         {children}
-      </p>
+      </div>
     </button>
   );
 }
