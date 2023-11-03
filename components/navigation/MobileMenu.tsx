@@ -13,7 +13,7 @@ function MobileMenu({ onClick }: PropType) {
     <div className="fixed inset-0 z-50 w-full bg-white shadow md:hidden">
       <div className="pt-6 px-4 flex items-center justify-between">
         <div className="flex items-center space-x-2 mb-11">
-          <Logo /> <p className="text-[#4E5D78] text-3xl font-bold">Stack</p>
+          <Logo /> <p className="text-brand-color text-3xl font-bold">Stack</p>
         </div>
 
         <button onClick={onClick}>

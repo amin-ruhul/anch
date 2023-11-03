@@ -1,90 +1,71 @@
+import OAuthButton from "@/components/sections/OAuthButton";
 import { Inter } from "next/font/google";
-import Logo from "@/icons/logo.svg";
-import Google from "@/icons/google.svg";
-import Apple from "@/icons/apple.svg";
-import AuthButton from "@/components/ui/button/AuthButton";
-import Email from "@/icons/email.svg";
 import AppTextInput from "@/components/ui/input/AppTextInput";
-import PrimaryButton from "@/components/ui/button/PrimaryButon";
 import AppPasswordInput from "@/components/ui/input/AppPasswordInput";
+import PrimaryButton from "@/components/ui/button/PrimaryButon";
+import AppCheckBox from "@/components/ui/input/AppCheckBox";
+import Link from "next/link";
+import EmailIcon from "@/icons/email.svg";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <main className={`${inter.className} px-[81px] py-[28px] border`}>
-      <nav className="flex items-center justify-between border w-full">
-        <div className="flex items-center space-x-1">
-          <Logo />
-          <p className="text-[#4E5D78] text-[18px] font-bold">Stack</p>
+    <div className="w-full flex items-center justify-center mt-[5.5rem]">
+      <section className="w-full max-w-[580px]">
+        <div className="flex flex-col items-center space-y-5">
+          <h1 className="font-bold text-[1.625rem] text-[#323B4B]">Sign In</h1>
+          <p className="text-lg font-medium text-gray-800">
+            Welcome back, you’ve been missed!
+          </p>
         </div>
-        <div className=" bg-gray-500 rounded-xl h-[43px] w-[146px] flex items-center justify-center">
-          <p>English</p>
-        </div>
-      </nav>
+        <OAuthButton />
 
-      <section>
-        <h1 className="font-bold text-[1.625rem] text-[#323B4B]">
-          Getting Started
-        </h1>
-        <p className="text-lg font-medium text-gray-800">
-          Create an account to continue!
-        </p>
-
-        <div className="mb-7">
-          <AuthButton>
-            <div className="flex items-center space-x-3">
-              <Google />
-              <p className="text-gray-800 font-medium">Sign Up with Google</p>
-            </div>
-          </AuthButton>
-
-          <AuthButton>
-            <div className="flex items-center space-x-3">
-              <Apple />
-              <p className="text-gray-800 font-medium">Sign Up with Google</p>
-            </div>
-          </AuthButton>
+        <div className="flex items-center space-x-2 mt-11 mb-9">
+          <div className="h-[2px] bg-gray-600 flex-1"></div>
+          <div>OR</div>
+          <div className="h-[2px] bg-gray-600 flex-1"></div>
         </div>
 
-        <div className="w-full border border-gray-600 rounded-2xl flex space-x-2 items-center px-2">
-          <Email />
-          <input
-            type="text"
-            className="flex-1 py-4 focus:outline-none focus:ring-0  outline-0 placeholder:text-gray-700 bg-white"
-            placeholder="Your email"
-          />
-        </div>
-
-        <div>
+        <div className="space-y-8">
           <AppTextInput
-            placeholder="Email"
-            logo={<Email />}
+            placeholder="Your Email"
+            logo={<EmailIcon />}
             register={() => {}}
-            error={{ name: "", message: "sdfsf" }}
+            error={{ name: "", message: "" }}
             name="email"
           />
-        </div>
 
-        <div>
+          <AppPasswordInput
+            placeholder="Password"
+            register={() => {}}
+            error={{ name: "", message: "" }}
+            name="email"
+          />
+
+          <AppCheckBox
+            name="remember"
+            register={() => {}}
+            error={{ name: "", message: "" }}
+            label="Remember Me"
+          />
+
           <PrimaryButton
             isLoading={false}
             disabled={false}
             onClick={() => console.log("clicked")}
           >
-            <p>Login</p>
+            Sign In
           </PrimaryButton>
         </div>
 
-        <div>
-          <AppPasswordInput
-            placeholder="Password"
-            register={() => {}}
-            error={{ name: "", message: "sdfsf" }}
-            name="email"
-          />
-        </div>
+        <p className="text-center text-gray-700 mt-9">
+          Don’t have an account yet?
+          <span className="text-primary ml-1">
+            <Link href="/sign-up">Sign Up</Link>
+          </span>
+        </p>
       </section>
-    </main>
+    </div>
   );
 }

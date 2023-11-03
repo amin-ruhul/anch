@@ -38,6 +38,7 @@ const config: Config = {
         },
 
         "error-color": "#FF5630",
+        "brand-color": "#4E5D78",
       },
     },
   },
