@@ -5,6 +5,7 @@ import Apple from "@/icons/apple.svg";
 import AuthButton from "@/components/ui/button/AuthButton";
 import Email from "@/icons/email.svg";
 import AppTextInput from "@/components/ui/input/AppTextInput";
+import PrimaryButton from "@/components/ui/button/PrimaryButon";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -62,6 +63,16 @@ export default function Home() {
             error={{ name: "", message: "sdfsf" }}
             name="email"
           />
+        </div>
+
+        <div>
+          <PrimaryButton
+            isLoading={false}
+            disabled={false}
+            onClick={() => console.log("clicked")}
+          >
+            <p>Login</p>
+          </PrimaryButton>
         </div>
       </section>
     </main>
