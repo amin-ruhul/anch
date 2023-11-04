@@ -7,12 +7,20 @@ import { useGetUser } from "@/repo/api-hooks/useGetUser";
 
 function Users() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: userData, refetch } = useGetUser(currentPage, {});
+  const { isLoading, data: userData, refetch } = useGetUser(currentPage, {});
 
   const handlePagination = async (page: number) => {
     setCurrentPage(page + 1);
     refetch();
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen">
+        <p className=" text-center text-3xl font-bold">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="">
@@ -87,13 +95,15 @@ function Users() {
         </table>
       </section>
 
-      <Pagination
-        totalPage={Math.ceil(
-          (userData?.total || 1) / (userData?.per_page || 1)
-        )}
-        initialPage={(userData?.page || 1) - 1}
-        getPaginateData={handlePagination}
-      />
+      {userData && (
+        <Pagination
+          totalPage={Math.ceil(
+            (userData?.total || 1) / (userData?.per_page || 1)
+          )}
+          initialPage={(userData?.page || 1) - 1}
+          getPaginateData={handlePagination}
+        />
+      )}
     </div>
   );
 }

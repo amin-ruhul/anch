@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import Image from "next/image";
 
+import { AnimatePresence } from "framer-motion";
+
 import HamburgerIcon from "@/icons/hamburger.svg";
 import NotificationIcon from "@/icons/notification.svg";
 import SearchIcon from "@/icons/search.svg";
@@ -41,9 +43,11 @@ function TopHeader() {
           </div>
         </div>
       </header>
-      {isMobileMenuOpen && (
-        <MobileMenu onClick={() => setIsMobileMenuOpen(false)} />
-      )}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <MobileMenu onClick={() => setIsMobileMenuOpen(false)} />
+        )}
+      </AnimatePresence>
     </>
   );
 }

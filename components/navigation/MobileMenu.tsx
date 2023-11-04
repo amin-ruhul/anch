@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { motion } from "framer-motion";
+
 import CloseIcon from "@/icons/cross.svg";
 import DashboardIcon from "@/icons/dashboard.svg";
 import Logo from "@/icons/logo.svg";
@@ -11,7 +13,21 @@ type PropType = {
 
 function MobileMenu({ onClick }: PropType) {
   return (
-    <div className="fixed inset-0 z-50 w-full bg-white shadow md:hidden">
+    <motion.div
+      className="fixed inset-0 z-50 w-full bg-white shadow md:hidden"
+      variants={{
+        open: {
+          x: 0,
+        },
+        close: {
+          x: "-100%",
+        },
+      }}
+      initial="close"
+      animate="open"
+      exit="close"
+      transition={{ duration: 0.2, delay: 0.1, bounce: 0.1 }}
+    >
       <div className="pt-6 px-4 flex items-center justify-between">
         <div className="flex items-center space-x-2 mb-11">
           <Logo /> <p className="text-brand-color text-3xl font-bold">Stack</p>
@@ -39,7 +55,7 @@ function MobileMenu({ onClick }: PropType) {
           </div>
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
