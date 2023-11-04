@@ -1,7 +1,10 @@
+import { toast } from "react-toastify";
+
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
 import authOption from "@/repo/api-endpoints/auth";
+import { clearAuthToken, setAuthToken } from "@/services/cookies";
 
 type StateType = {
   isLoading: boolean;
@@ -51,11 +54,15 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.authToken = action.payload.token;
         state.errorMessage = "";
+        setAuthToken(action.payload);
+        toast.success("Login Success");
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.errorMessage = action.payload + "";
         state.authToken = null;
+        clearAuthToken();
+        toast.error(action.payload + "");
       });
   },
 });

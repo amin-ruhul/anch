@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 
 import { Inter } from "next/font/google";
 import Link from "next/link";
@@ -13,6 +11,7 @@ import AppCheckBox from "@/components/ui/input/AppCheckBox";
 import AppPasswordInput from "@/components/ui/input/AppPasswordInput";
 import AppTextInput from "@/components/ui/input/AppTextInput";
 import EmailIcon from "@/icons/email.svg";
+import { setAuthToken } from "@/services/cookies";
 import { login } from "@/store/feature/authSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { signInSchema } from "@/utils/schema/auth";
@@ -25,12 +24,6 @@ export default function Home() {
   const dispatch = useAppDispatch();
 
   console.log({ isLoading, authToken, errorMessage });
-
-  useEffect(() => {
-    if (errorMessage) {
-      toast.error(errorMessage);
-    }
-  }, [errorMessage]);
 
   const {
     register,
