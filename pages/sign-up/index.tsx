@@ -1,13 +1,16 @@
-import EmailIcon from "@/icons/email.svg";
-import AppTextInput from "@/components/ui/input/AppTextInput";
-import AppPasswordInput from "@/components/ui/input/AppPasswordInput";
-import NameIcon from "@/icons/name.svg";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+import Link from "next/link";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import OAuthButton from "@/components/sections/OAuthButton";
 import PrimaryButton from "@/components/ui/button/PrimaryButon";
 import AppCheckBox from "@/components/ui/input/AppCheckBox";
-import Link from "next/link";
-import OAuthButton from "@/components/sections/OAuthButton";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import AppPasswordInput from "@/components/ui/input/AppPasswordInput";
+import AppTextInput from "@/components/ui/input/AppTextInput";
+import EmailIcon from "@/icons/email.svg";
+import NameIcon from "@/icons/name.svg";
 import { signUpSchema } from "@/utils/schema/auth";
 import { SignUpInputTypes } from "@/utils/types/auth";
 

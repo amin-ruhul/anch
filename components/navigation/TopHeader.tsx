@@ -1,9 +1,12 @@
-import NotificationIcon from "@/icons/notification.svg";
-import Image from "next/image";
-import SearchIcon from "@/icons/search.svg";
 import { useState } from "react";
-import MobileMenu from "./MobileMenu";
+
+import Image from "next/image";
+
 import HamburgerIcon from "@/icons/hamburger.svg";
+import NotificationIcon from "@/icons/notification.svg";
+import SearchIcon from "@/icons/search.svg";
+
+import MobileMenu from "./MobileMenu";
 
 function TopHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

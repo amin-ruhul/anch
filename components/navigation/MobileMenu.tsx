@@ -1,7 +1,8 @@
-import CloseIcon from "@/icons/cross.svg";
-import Logo from "@/icons/logo.svg";
 import Link from "next/link";
+
+import CloseIcon from "@/icons/cross.svg";
 import DashboardIcon from "@/icons/dashboard.svg";
+import Logo from "@/icons/logo.svg";
 import UserIcon from "@/icons/user.svg";
 
 type PropType = {

@@ -1,7 +1,8 @@
-import Logo from "@/icons/logo.svg";
-import DashboardIcon from "@/icons/dashboard.svg";
-import UserIcon from "@/icons/user.svg";
 import Link from "next/link";
+
+import DashboardIcon from "@/icons/dashboard.svg";
+import Logo from "@/icons/logo.svg";
+import UserIcon from "@/icons/user.svg";
 
 function SideMenu() {
   return (

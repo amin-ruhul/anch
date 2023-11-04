@@ -1,17 +1,37 @@
-import OAuthButton from "@/components/sections/OAuthButton";
+import { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+
 import { Inter } from "next/font/google";
-import AppTextInput from "@/components/ui/input/AppTextInput";
-import AppPasswordInput from "@/components/ui/input/AppPasswordInput";
+import Link from "next/link";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import OAuthButton from "@/components/sections/OAuthButton";
 import PrimaryButton from "@/components/ui/button/PrimaryButon";
 import AppCheckBox from "@/components/ui/input/AppCheckBox";
-import Link from "next/link";
+import AppPasswordInput from "@/components/ui/input/AppPasswordInput";
+import AppTextInput from "@/components/ui/input/AppTextInput";
 import EmailIcon from "@/icons/email.svg";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { login } from "@/store/feature/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { signInSchema } from "@/utils/schema/auth";
 import { SignInInputTypes } from "@/utils/types/auth";
 
 export default function Home() {
+  const { isLoading, authToken, errorMessage } = useAppSelector(
+    (state) => state.auth
+  );
+  const dispatch = useAppDispatch();
+
+  console.log({ isLoading, authToken, errorMessage });
+
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(errorMessage);
+    }
+  }, [errorMessage]);
+
   const {
     register,
     handleSubmit,
@@ -24,6 +44,7 @@ export default function Home() {
 
   const onSubmit: SubmitHandler<SignInInputTypes> = (data) => {
     console.log(data);
+    dispatch(login({ email: data.email, password: data.password }));
   };
 
   return (
@@ -67,8 +88,8 @@ export default function Home() {
           />
 
           <PrimaryButton
-            isLoading={false}
-            disabled={false}
+            isLoading={isLoading}
+            disabled={isLoading}
             onClick={() => console.log("clicked")}
           >
             Sign In

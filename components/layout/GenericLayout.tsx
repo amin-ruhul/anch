@@ -1,8 +1,11 @@
-import Logo from "@/icons/logo.svg";
-import ChevronDownIcon from "@/icons/down.svg";
-import DropDown from "../navigation/DropDown";
 import { useState } from "react";
+
 import Link from "next/link";
+
+import ChevronDownIcon from "@/icons/down.svg";
+import Logo from "@/icons/logo.svg";
+
+import DropDown from "../navigation/DropDown";
 
 function GenericLayout({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState("English");
