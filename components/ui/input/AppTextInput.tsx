@@ -1,10 +1,10 @@
-//import { UseFormRegister, FieldValues } from "react-hook-form";
+import { FieldError } from "react-hook-form";
 import clsx from "clsx";
 
 type AppTextInputType = {
-  name: string;
+  name: "password" | "email" | "remember" | "name";
   register: any;
-  error: Error;
+  error: FieldError | undefined;
   placeholder: string;
   logo: React.ReactNode;
   inputType?: string;
@@ -21,13 +21,13 @@ function AppTextInput({
   className,
 }: AppTextInputType) {
   return (
-    <>
+    <section>
       <div
         className={clsx(
           className,
-          { "border-error-color": error.message },
-          { "border-gray-600": !error.message },
-          "w-full border  rounded-2xl flex space-x-2 items-center px-4"
+          { "border-error-color": error?.message },
+          { "border-gray-600": !error?.message },
+          "w-full border  rounded-2xl flex space-x-2 items-center px-4 transition-all duration-150 delay-75"
         )}
       >
         {logo}
@@ -40,11 +40,11 @@ function AppTextInput({
       </div>
 
       {error?.message && (
-        <p className="text-error-color text-sm mt-[0.35rem] first-letter:uppercase">
+        <p className="text-error-color text-sm mt-3 first-letter:uppercase">
           {error?.message}
         </p>
       )}
-    </>
+    </section>
   );
 }
 

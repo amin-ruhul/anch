@@ -1,4 +1,4 @@
-//import { UseFormRegister, FieldValues } from "react-hook-form";
+import { FieldError } from "react-hook-form";
 import clsx from "clsx";
 import LockIcon from "@/icons/password.svg";
 import OpenEye from "@/icons/open-eye.svg";
@@ -8,7 +8,7 @@ import { useState } from "react";
 type AppPasswordInputType = {
   name: string;
   register: any;
-  error: Error;
+  error: FieldError | undefined;
   placeholder: string;
   className?: string;
 };
@@ -23,12 +23,12 @@ function AppPasswordInput({
   const [eyeStatus, setEyeStatus] = useState(false);
 
   return (
-    <>
+    <section>
       <div
         className={clsx(
           className,
-          { "border-error-color": error.message },
-          { "border-gray-600": !error.message },
+          { "border-error-color": error?.message },
+          { "border-gray-600": !error?.message },
           "w-full border  rounded-2xl flex space-x-2 items-center px-4"
         )}
       >
@@ -49,11 +49,11 @@ function AppPasswordInput({
       </div>
 
       {error?.message && (
-        <p className="text-error-color text-sm mt-[0.35rem] first-letter:uppercase">
+        <p className="text-error-color text-sm mt-3 first-letter:uppercase">
           {error?.message}
         </p>
       )}
-    </>
+    </section>
   );
 }
 

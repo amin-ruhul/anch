@@ -6,10 +6,26 @@ import PrimaryButton from "@/components/ui/button/PrimaryButon";
 import AppCheckBox from "@/components/ui/input/AppCheckBox";
 import Link from "next/link";
 import EmailIcon from "@/icons/email.svg";
-
-const inter = Inter({ subsets: ["latin"] });
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { signInSchema } from "@/utils/schema/auth";
+import { SignInInputTypes } from "@/utils/types/auth";
 
 export default function Home() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignInInputTypes>({
+    mode: "onBlur",
+    reValidateMode: "onBlur",
+    resolver: yupResolver<SignInInputTypes>(signInSchema),
+  });
+
+  const onSubmit: SubmitHandler<SignInInputTypes> = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="w-full flex items-center justify-center mt-[5.5rem]">
       <section className="w-full max-w-[580px]">
@@ -27,26 +43,26 @@ export default function Home() {
           <div className="h-[2px] bg-gray-600 flex-1"></div>
         </div>
 
-        <div className="space-y-8">
+        <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
           <AppTextInput
+            name="email"
             placeholder="Your Email"
             logo={<EmailIcon />}
-            register={() => {}}
-            error={{ name: "", message: "" }}
-            name="email"
+            register={register}
+            error={errors.email}
           />
 
           <AppPasswordInput
             placeholder="Password"
-            register={() => {}}
-            error={{ name: "", message: "" }}
-            name="email"
+            name="password"
+            register={register}
+            error={errors.password}
           />
 
           <AppCheckBox
             name="remember"
-            register={() => {}}
-            error={{ name: "", message: "" }}
+            register={register}
+            error={errors.remember}
             label="Remember Me"
           />
 
@@ -57,7 +73,7 @@ export default function Home() {
           >
             Sign In
           </PrimaryButton>
-        </div>
+        </form>
 
         <p className="text-center text-gray-700 mt-9">
           Don’t have an account yet?

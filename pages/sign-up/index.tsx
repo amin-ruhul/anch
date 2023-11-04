@@ -6,8 +6,26 @@ import PrimaryButton from "@/components/ui/button/PrimaryButon";
 import AppCheckBox from "@/components/ui/input/AppCheckBox";
 import Link from "next/link";
 import OAuthButton from "@/components/sections/OAuthButton";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { signUpSchema } from "@/utils/schema/auth";
+import { SignUpInputTypes } from "@/utils/types/auth";
 
 function SignUp() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpInputTypes>({
+    mode: "onBlur",
+    reValidateMode: "onBlur",
+    resolver: yupResolver<SignUpInputTypes>(signUpSchema),
+  });
+
+  const onSubmit: SubmitHandler<SignUpInputTypes> = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="w-full flex items-center justify-center mt-[4.5rem]">
       <section className="w-full max-w-[580px]">
@@ -28,50 +46,46 @@ function SignUp() {
           <div className="h-[2px] bg-gray-600 flex-1"></div>
         </div>
 
-        <div className="space-y-8">
+        <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
           <AppTextInput
             placeholder="Your Email"
             logo={<EmailIcon />}
-            register={() => {}}
-            error={{ name: "", message: "" }}
             name="email"
+            register={register}
+            error={errors.email}
           />
 
           <AppTextInput
             placeholder="Your Name"
             logo={<NameIcon />}
-            register={() => {}}
-            error={{ name: "", message: "" }}
-            name="email"
+            name="name"
+            register={register}
+            error={errors.name}
           />
 
           <AppPasswordInput
             placeholder="Password"
-            register={() => {}}
-            error={{ name: "", message: "" }}
-            name="email"
+            name="password"
+            register={register}
+            error={errors.password}
           />
 
           <AppCheckBox
-            name="condition"
-            register={() => {}}
-            error={{ name: "", message: "" }}
+            name="terms"
+            register={register}
+            error={errors.terms}
             label="I agree to the Terms & Conditions"
           />
 
-          <PrimaryButton
-            isLoading={false}
-            disabled={false}
-            onClick={() => console.log("clicked")}
-          >
+          <PrimaryButton isLoading={false} disabled={false}>
             Sign Up
           </PrimaryButton>
-        </div>
+        </form>
 
         <p className="text-center text-gray-700 mt-9">
           Already have an account?
           <span className="text-primary ml-1">
-            <Link href="/">Sign In</Link>{" "}
+            <Link href="/">Sign In</Link>
           </span>
         </p>
       </section>

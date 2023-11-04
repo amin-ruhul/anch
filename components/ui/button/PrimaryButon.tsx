@@ -6,7 +6,7 @@ type PrimaryButtonProps = {
   className?: string;
   isLoading: boolean;
   disabled: boolean;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 function PrimaryButton({
