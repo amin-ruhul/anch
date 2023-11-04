@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 import Link from "next/link";
 
@@ -26,11 +27,11 @@ function SignUp() {
   });
 
   const onSubmit: SubmitHandler<SignUpInputTypes> = (data) => {
-    console.log(data);
+    toast.info(JSON.stringify(data));
   };
 
   return (
-    <div className="w-full flex items-center justify-center mt-[4.5rem]">
+    <div className="w-full flex items-center justify-center py-7">
       <section className="w-full max-w-[580px]">
         <div className="flex flex-col items-center space-y-5">
           <h1 className="font-bold text-[1.625rem] text-[#323B4B]">

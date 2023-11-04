@@ -7,11 +7,14 @@ import GenericLayout from "./GenericLayout";
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { authToken } = useAppSelector((state) => state.auth);
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     if (authToken) {
       setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
     }
   }, [authToken]);
 

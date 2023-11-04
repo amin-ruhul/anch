@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://reqres.in/api",
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   timeout: 20000,
 });
 

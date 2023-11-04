@@ -40,6 +40,7 @@ const authSlice = createSlice({
     reset: (state) => {
       state.errorMessage = "";
       state.isLoading = false;
+      state.authToken = null;
     },
   },
 

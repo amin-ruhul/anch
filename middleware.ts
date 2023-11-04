@@ -5,7 +5,7 @@ const protectedRoutes = ["/users", "/dashboard"];
 
 export default function middleware(req: NextRequest) {
   let token = req.cookies.get("ancr-auth-token");
-  console.log({ token });
+
   if (token) {
     if (authRoutes.includes(req.nextUrl.pathname)) {
       return NextResponse.redirect(new URL("/dashboard", req.url));

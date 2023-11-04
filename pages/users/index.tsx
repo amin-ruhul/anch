@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Image from "next/image";
 
+import Pagination from "@/components/navigation/Pagination";
 import { useGetUser } from "@/repo/api-hooks/useGetUser";
 
 function Users() {
-  const { data: userData } = useGetUser(1, {});
-  console.log(userData);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data: userData, refetch } = useGetUser(currentPage, {});
+
+  const handlePagination = async (page: number) => {
+    setCurrentPage(page + 1);
+    refetch();
+  };
+
   return (
-    <div>
+    <div className="">
       <h1 className="text-[#323B4B] font-medium text-2xl mb-11">User List</h1>
 
       <section className="w-full">
@@ -44,8 +51,8 @@ function Users() {
                 key={user.id}
                 className=" items-center text-[#4E5D78] font-semibold"
               >
-                <td className="ml-[3rem] align-middle h-full hidden md:block">
-                  <p className=" text-center"> {user.id}</p>
+                <td className="ml-[3rem] align-middle hidden md:block">
+                  <p> {user.id}</p>
                 </td>
                 <td className="py-[1rem] pl-[1rem]">
                   <div className="flex items-center space-x-5">
@@ -64,7 +71,7 @@ function Users() {
                     </div>
                   </div>
                 </td>
-                <td className="py-[1rem] pl-[1rem] h-full align-middle hidden md:block">
+                <td className="py-[1rem] pl-[1rem]  align-middle hidden md:block">
                   <p>{user.email}</p>
                 </td>
                 <td className="py-[1rem]  pl-[1rem]  h-full align-middle">
@@ -79,6 +86,14 @@ function Users() {
           </tbody>
         </table>
       </section>
+
+      <Pagination
+        totalPage={Math.ceil(
+          (userData?.total || 1) / (userData?.per_page || 1)
+        )}
+        initialPage={(userData?.page || 1) - 1}
+        getPaginateData={handlePagination}
+      />
     </div>
   );
 }
