@@ -8,7 +8,9 @@ function PasswordProgressBar({ password }: { password: string }) {
   const specialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
   const calculatePasswordLength = (password: string) => {
-    if (!password) return;
+    if (!password) {
+      return setPasswordStrength(0);
+    }
     let count = 1;
 
     if (password.length >= 8) {
