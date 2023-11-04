@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import PasswordProgressBar from "@/components/data-input/PasswordProgressBar";
 import OAuthButton from "@/components/sections/OAuthButton";
 import PrimaryButton from "@/components/ui/button/PrimaryButon";
 import AppCheckBox from "@/components/ui/input/AppCheckBox";
@@ -19,6 +20,7 @@ function SignUp() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<SignUpInputTypes>({
     mode: "onBlur",
@@ -73,6 +75,8 @@ function SignUp() {
             register={register}
             error={errors.password}
           />
+
+          <PasswordProgressBar password={watch("password")} />
 
           <AppCheckBox
             name="terms"
